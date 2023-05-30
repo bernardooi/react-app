@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -39,7 +39,7 @@ const ToDo = () => {
 
   const STORAGE_KEY = 'todos';
 
-  const _storeData = async (todos) => {
+  const _storeData = async todos => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
     } catch (error) {
@@ -73,12 +73,12 @@ const ToDo = () => {
     }
   };
 
-  const onChangeText = (value) => setInput(value);
+  const onChangeText = value => setInput(value);
 
   const onSubmitEditing = () => {
     if (!input) return;
 
-    const newTodo = { todo: input };
+    const newTodo = {todo: input};
     const updatedTodos = [...todos, newTodo];
 
     _storeData(updatedTodos);
@@ -87,7 +87,7 @@ const ToDo = () => {
   };
 
   return (
-    <View style={{ borderWidth: 2 }}>
+    <View style={{borderWidth: 2}}>
       <View style={styles.toDoMain}>
         <TextInput
           style={styles.textInput}
@@ -97,20 +97,31 @@ const ToDo = () => {
         />
         <TouchableOpacity style={styles.toDoButton} onPress={onSubmitEditing}>
           <View>
-            <Text style={{ textAlign: 'center', fontSize: 20, borderWidth: 2, marginTop: 10 }}>Save To Do</Text>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 20,
+                borderWidth: 2,
+                marginTop: 10,
+              }}>
+              Save To Do
+            </Text>
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.toDoButton} onPress={clearStorage}>
-  <View>
-    <Text 
-      style={{textAlign:'center', fontSize:20, borderWidth:2, marginTop:10,}}
-    >
-      Clear
-    </Text>
-  </View>
-</TouchableOpacity>
-
+          <View>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 20,
+                borderWidth: 2,
+                marginTop: 10,
+              }}>
+              Clear
+            </Text>
+          </View>
+        </TouchableOpacity>
 
         {todos.map((todo, index) => (
           <View key={index} style={styles.todoItem}>
